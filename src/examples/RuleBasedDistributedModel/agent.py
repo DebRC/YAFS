@@ -89,7 +89,7 @@ class PolicyManager():
                     service_node= int(row["SRC"])
                     service_name = row["module"]
                     user_node = int(row["DST"])
-                    self.agents[(service_name, service_node)].update_response_log(user_node, row[3:])
+                    self.agents[(service_name, service_node)]=(user_node, row[3:])
 
                 print(self.agents)
             else:

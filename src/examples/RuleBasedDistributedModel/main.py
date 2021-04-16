@@ -17,11 +17,9 @@ import numpy as np
 from collections import Counter
 
 from yafs.core import Sim
-from yafs.application import Application, Message
+from yafs.application import Application, Message, fractional_selectivity
 from yafs.topology import Topology
 from yafs.distribution import *
-from yafs.utils import fractional_selectivity
-
 from yafs.placement import JSONPlacement
 
 from selection_multipleDeploys import DeviceSpeedAwareRouting
@@ -118,7 +116,7 @@ def main(simulated_time, path,pathResults,case,it):
     # dataNetwork = json.load(open(path + 'networkDefinition.json'))
     dataNetwork = json.load(open(path + 'networkDefinition.json'))
     t.load_all_node_attr(dataNetwork)
-    t.write(path +"network.gexf")
+    # t.write(path +"network.gexf")
     # t = loadTopology(path + 'test_GLP.gml')
 
 
@@ -164,9 +162,9 @@ def main(simulated_time, path,pathResults,case,it):
             if element['app'] == aName:
                 data.append(element)
 
-        distribution = exponentialDistribution(name="Exp", lambd=random.randint(100,200), seed= int(aName)*100+it)
+        distribution = exponential_distribution(name="Exp", lambd=random.randint(100,200), seed= int(aName)*100+it)
         pop_app = DynamicPopulation(name="Dynamic_%s" % aName, data=data, iteration=it, activation_dist=distribution)
-        s.deploy_app(apps[aName], placement, pop_app, selectorPath)
+        s.deploy_app2(apps[aName], placement, pop_app, selectorPath)
 
 
     """
@@ -178,7 +176,7 @@ def main(simulated_time, path,pathResults,case,it):
     # evol = CustomStrategy(path,pathResults,total_services=6,draw_grid_topology_dimension=10,pathCSV=default_results_path)
     # s.deploy_monitor("EvolutionOfServices", evol, dStart, **{"sim": s, "routing": selectorPath,"case":case, "stop_time":stop_time, "it":it})
 
-    dStart = deterministicDistribution(10, name="Deterministic")
+    dStart = deterministic_distribution(10, name="Deterministic")
     appOp = Mario()
     s.deploy_monitor("App Opertor", appOp, dStart,**{"sim": s, "routing": selectorPath, "pathCSV":default_results_path})
 
