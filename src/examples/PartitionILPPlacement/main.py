@@ -5,21 +5,19 @@
     @author: Isaac Lera & Carlos Guerrero
 
 """
-import json
+import json, random
+import time
+import numpy as np
 
 from yafs.core import Sim
-from yafs.application import Application,Message
+from yafs.application import Application,Message, fractional_selectivity
 from yafs.topology import Topology
 from yafs.placement import JSONPlacement,JSONPlacementOnCloud
 from yafs.distribution import *
-import numpy as np
-
-from yafs.utils import fractional_selectivity
 
 from selection_multipleDeploys import DeviceSpeedAwareRouting
 from jsonPopulation import JSONPopulation
 
-import time
 
 
 
@@ -111,7 +109,7 @@ def main(simulated_time,experimento,ilpPath,it):
     t = Topology()
     dataNetwork = json.load(open(experimento+'networkDefinition.json'))
     t.load(dataNetwork)
-    t.write("network.gexf")
+    # t.write("network.gexf")
 
     """
     APPLICATION
@@ -175,7 +173,7 @@ def main(simulated_time,experimento,ilpPath,it):
 
     #For each deployment the user - population have to contain only its specific sources
     for aName in apps.keys():
-        print "Deploying app: ",aName
+        print("Deploying app: ",aName)
         pop_app = JSONPopulation(name="Statical_%s"%aName,json={},iteration=it)
         data = []
         for element in pop.data["sources"]:
@@ -183,7 +181,7 @@ def main(simulated_time,experimento,ilpPath,it):
                 data.append(element)
         pop_app.data["sources"]=data
 
-        s.deploy_app(apps[aName], placement, pop_app, selectorPath)
+        s.deploy_app2(apps[aName], placement, pop_app, selectorPath)
 
 
     s.run(stop_time, test_initial_deploy=False, show_progress_monitor=False) #TEST to TRUE
@@ -208,7 +206,7 @@ if __name__ == '__main__':
     #pathExperimento = "/home/uib/src/YAFS/src/examples/PartitionILPPlacement/exp_rev/"
 
     timeSimulation = 10000
-    print os.getcwd()
+    print(os.getcwd())
     # logging.config.fileConfig(os.getcwd()+'/logging.ini')
     for i in range(50):
     #for i in  [0]:
@@ -217,15 +215,15 @@ if __name__ == '__main__':
         np.random.seed(i)
         idxFControl = 0
 # 1000000
-        print "Running Partition"
+        print("Running Partition")
         main(simulated_time=1000000,  experimento=pathExperimento,ilpPath='',it=i)
         print("\n--- %s seconds ---" % (time.time() - start_time))
         start_time = time.time()
-        print "Running: ILP "
+        print("Running: ILP ")
         idxFControl = 0
         main(simulated_time=1000000,  experimento=pathExperimento, ilpPath='ILP',it=i)
         print("\n--- %s seconds ---" % (time.time() - start_time))
 
-    print "Simulation Done"
+    print("Simulation Done")
 
 

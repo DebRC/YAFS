@@ -6,20 +6,18 @@
 
 """
 import json
+import numpy as np
+import random, time
 
 from yafs.core import Sim
-from yafs.application import Application,Message
+from yafs.application import Application, Message, fractional_selectivity
 from yafs.topology import Topology
 from yafs.placement import JSONPlacement,JSONPlacementOnCloud
 from yafs.distribution import *
-import numpy as np
 
-from yafs.utils import fractional_selectivity
 
 from selection_multipleDeploys import DeviceSpeedAwareRouting
 from jsonPopulation import JSONPopulation
-
-import time
 
 
 
@@ -172,7 +170,7 @@ def main(simulated_time,experimento,ilpPath,it):
 
     #For each deployment the user - population have to contain only its specific sources
     for aName in apps.keys():
-        print "Deploying app: ",aName
+        print("Deploying app: ",aName)
         pop_app = JSONPopulation(name="Statical_%s" % aName, json={}, iteration=it)
         data = []
         for element in pop.data["sources"]:
@@ -180,7 +178,7 @@ def main(simulated_time,experimento,ilpPath,it):
                 data.append(element)
         pop_app.data["sources"]=data
 
-        s.deploy_app(apps[aName], placement, pop_app, selectorPath)
+        s.deploy_app2(apps[aName], placement, pop_app, selectorPath)
 
 
     s.run(stop_time, test_initial_deploy=False, show_progress_monitor=False) #TEST to TRUE
@@ -203,21 +201,19 @@ if __name__ == '__main__':
     pathExperimento = "exp_rev/"
     pathExperimento = "/home/uib/src/YAFS/src/examples/PartitionILPPlacement/exp_rev/"
 
-    print os.getcwd()
+    print(os.getcwd())
     # logging.config.fileConfig(os.getcwd()+'/logging.ini')
     for i in range(50):
         start_time = time.time()
         random.seed(i)
         np.random.seed(i)
 # 1000000
-        print "Running Partition"
+        print("Running Partition")
         main(simulated_time=1000000,  experimento=pathExperimento,ilpPath='',it=i)
         print("\n--- %s seconds ---" % (time.time() - start_time))
         start_time = time.time()
-        print "Running: ILP "
+        print("Running: ILP ")
         main(simulated_time=1000000,  experimento=pathExperimento, ilpPath='ILP',it=i)
         print("\n--- %s seconds ---" % (time.time() - start_time))
 
-    print "Simulation Done"
-
-
+    print("Simulation Done")
