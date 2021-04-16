@@ -93,14 +93,14 @@ def networkGeneration(pathTXT,idcloud):
         nodePower_min[i]=eval(func_POWERmin)
         nodePower_max[i]=nodePower_min[i]+eval(func_POWERmax)
     
-    print tiers
+    print(tiers)
     for e in G.edges:
         tier = tiers[e[0]]
         if tier<tiers[e[1]]: #getMAX
             tier = tiers[e[1]]
 #        print tier
         pr = eval(func_PROPAGATIONTIME)*tier
-        print pr
+        print(pr)
         G[e[0]][e[1]]['PR']= pr
         bw = int(eval(func_BANDWITDH)*(1.0/float(tier)))
 #        print bw
@@ -186,7 +186,7 @@ def userGeneration(id_gateways,G):
                 myUsers.append(myOneUser)
             appsRequests.append(userRequestList)
         
-        print "Usuarios creados : %i "%len(myUsers)
+        print("Usuarios creados : %i "%len(myUsers))
         userJson['sources']=myUsers
         
         return userJson
@@ -212,7 +212,7 @@ def appGeneration():
     
     
     for i in range(TOTALNUMBEROFAPPS):
-        print "CREANDDO APP :%i "%i
+        print("CREANDDO APP :%i "%i)
         
         myApp = {}
         APP = eval(func_APPGENERATION)

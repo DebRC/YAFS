@@ -1,20 +1,21 @@
-2019-09-12 09:15:04,661 - root - INFO - Running MCDA - ELECTRE - exp1/
-2019-09-12 09:15:04,726 - placementOnlyCloud - INFO -  Placement Initialization of MCDA-Placement in NodeCLOUD: 153
-2019-09-12 09:15:04,726 - MCDAPathSelectionNPlacement - INFO -   MCDA - ELECTRE - Routing, Placement and Selection initialitzed 
-2019-09-12 09:15:04,730 - jsonDynamicPopulation - INFO -  Initializating dynamic population: Dynamic_1
-2019-09-12 09:15:04,730 - jsonDynamicPopulation - INFO -  Initializating dynamic population: Dynamic_0
-2019-09-12 09:15:04,730 - jsonDynamicPopulation - INFO -  Initializating dynamic population: Dynamic_3
-2019-09-12 09:15:04,730 - jsonDynamicPopulation - INFO -  Initializating dynamic population: Dynamic_2
-2019-09-12 09:15:04,730 - jsonDynamicPopulation - INFO -  Initializating dynamic population: Dynamic_5
-2019-09-12 09:15:04,731 - jsonDynamicPopulation - INFO -  Initializating dynamic population: Dynamic_4
-2019-09-12 09:15:04,731 - jsonDynamicPopulation - INFO -  Initializating dynamic population: Dynamic_7
-2019-09-12 09:15:04,731 - jsonDynamicPopulation - INFO -  Initializating dynamic population: Dynamic_6
-2019-09-12 09:15:04,731 - jsonDynamicPopulation - INFO -  Initializating dynamic population: Dynamic_9
-2019-09-12 09:15:04,731 - jsonDynamicPopulation - INFO -  Initializating dynamic population: Dynamic_8
-2019-09-12 09:15:04,731 - root - INFO -  Performing simulation: MCDA 0 
-2019-09-12 09:15:04,779 - jsonDynamicPopulation - INFO - Launching user 194 (app: 6), in node: 194, at time: 12 
-2019-09-12 09:15:04,779 - jsonDynamicPopulation - INFO - Launching user 199 (app: 8), in node: 199, at time: 53 
-2019-09-12 09:15:04,779 - jsonDynamicPopulation - INFO - Launching user 198 (app: 7), in node: 198, at time: 137 
-2019-09-12 09:15:04,780 - root - INFO - Take an action on service: 8_52 from node: 199
-2019-09-12 09:15:04,783 - MCDAPathSelectionNPlacement - INFO - Ignored nodes [194, 198, 199]
-2019-09-12 09:15:04,815 - MCDAPathSelectionNPlacement - INFO - Running R script
+2021-04-16 21:56:47,869 - root - INFO - Running MCDA - ELECTRE - exp1/
+2021-04-16 21:56:47,873 - placementOnlyCloud - INFO -  Placement Initialization of MCDA-Placement in NodeCLOUD: 153
+2021-04-16 21:56:47,873 - MCDAPathSelectionNPlacement - INFO -   MCDA - ELECTRE - Routing, Placement and Selection initialitzed 
+2021-04-16 21:56:47,876 - jsonDynamicPopulation - INFO -  Initializating dynamic population: Dynamic_0
+2021-04-16 21:56:47,877 - jsonDynamicPopulation - INFO -  Initializating dynamic population: Dynamic_1
+2021-04-16 21:56:47,878 - jsonDynamicPopulation - INFO -  Initializating dynamic population: Dynamic_2
+2021-04-16 21:56:47,879 - jsonDynamicPopulation - INFO -  Initializating dynamic population: Dynamic_3
+2021-04-16 21:56:47,880 - jsonDynamicPopulation - INFO -  Initializating dynamic population: Dynamic_4
+2021-04-16 21:56:47,881 - jsonDynamicPopulation - INFO -  Initializating dynamic population: Dynamic_5
+2021-04-16 21:56:47,881 - jsonDynamicPopulation - INFO -  Initializating dynamic population: Dynamic_6
+2021-04-16 21:56:47,882 - jsonDynamicPopulation - INFO -  Initializating dynamic population: Dynamic_7
+2021-04-16 21:56:47,883 - jsonDynamicPopulation - INFO -  Initializating dynamic population: Dynamic_8
+2021-04-16 21:56:47,884 - jsonDynamicPopulation - INFO -  Initializating dynamic population: Dynamic_9
+2021-04-16 21:56:47,884 - root - INFO -  Performing simulation: MCDA 0 
+2021-04-16 21:56:47,907 - jsonDynamicPopulation - INFO - Launching user 194 (app: 6), in node: 194, at time: 20 
+2021-04-16 21:56:47,908 - jsonDynamicPopulation - INFO - Launching user 199 (app: 8), in node: 199, at time: 43 
+2021-04-16 21:56:47,908 - jsonDynamicPopulation - INFO - Launching user 198 (app: 7), in node: 198, at time: 101 
+2021-04-16 21:56:47,908 - jsonDynamicPopulation - INFO - Launching user 169 (app: 4), in node: 169, at time: 155 
+2021-04-16 21:56:47,909 - root - INFO - Take an action on service: 8_52 from node: 199
+2021-04-16 21:56:47,910 - MCDAPathSelectionNPlacement - INFO - Ignored nodes [dict_values([153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 194, 199, 198, 169])]
+2021-04-16 21:56:47,924 - MCDAPathSelectionNPlacement - INFO - Running R script

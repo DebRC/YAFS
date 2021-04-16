@@ -11,6 +11,7 @@ from yafs.topology import *
 import operator
 import itertools
 import numpy as np
+import logging
 from sklearn import preprocessing
 
 NodeDES = namedtuple('NodeDES', ['node', 'des','path'])
@@ -239,7 +240,7 @@ class WARoutingAndDeploying(Selection):
         # criteriaMinMax += ",min"
 
         #4 CRITERIA: min : penalizacion por "SW" incompatibility "NODE id % app user"
-        print app_name
+        print(app_name)
 
         values = []
         for node in nodes:
@@ -306,7 +307,7 @@ class WARoutingAndDeploying(Selection):
 
         best_node =  wa.idxmin()
 
-        print "BEST NODE: %i",best_node
+        print("BEST NODE: %i",best_node)
 
 
         df.to_csv(self.dname + "/data_%i.csv" % self.idEvaluation, index=False, index_label=False)
@@ -325,13 +326,12 @@ class WARoutingAndDeploying(Selection):
 
 
     def print_control_services(self):
-        print "-"*30
-        print " - Assignaments (node_src,service) -> (PATH, DES) "
-        print "-" * 30
+        print("-"*30)
+        print(" - Assignaments (node_src,service) -> (PATH, DES) ")
+        print("-" * 30)
         for k in self.controlServices.keys():
-            print k,"->",self.controlServices[k]
-
-        print "-" * 30
+            print(k,"->",self.controlServices[k])
+        print("-" * 30)
         return self.controlServices
 
     """
@@ -397,7 +397,7 @@ class WARoutingAndDeploying(Selection):
                 # sim.print_debug_assignaments()
             else:
                 des = [des]
-                print "HERE Node: %i, APP: %s , SERVICE: %s" %(best_node,app_name,service)
+                print("HERE Node: %i, APP: %s , SERVICE: %s" %(best_node,app_name,service))
                 logging.info("From node choice: DES: %s " % (des))
 
             #TODO gestionar best_node action

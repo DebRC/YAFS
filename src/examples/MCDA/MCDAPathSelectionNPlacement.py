@@ -3,6 +3,7 @@ import itertools
 import time
 import os
 import pandas as pd
+import logging
 import operator
 from subprocess import Popen, PIPE
 from collections import namedtuple
@@ -169,7 +170,7 @@ class MCDARoutingAndDeploying(Selection):
     def runMCDAR(self,pathRScript, pathWD, fileName, ncriteria, criteriaWeights, categoriesLowerProfiles,
                      criteriaMinMax, criteriaVetos, majorityThreshold):
 
-        cmd = ["Rscript", pathRScript + "/rscripts/MCDAv2.R", pathWD, fileName, ncriteria, criteriaWeights,
+        cmd = [pathRScript + "rscripts/MCDAv2.R", pathWD, fileName, ncriteria, criteriaWeights,
               categoriesLowerProfiles,criteriaMinMax, criteriaVetos, majorityThreshold]
         proc = Popen(cmd, stdout=PIPE)
         stdout = proc.communicate()[0]
@@ -178,7 +179,7 @@ class MCDARoutingAndDeploying(Selection):
     def runELECTRER(self,pathRScript, pathWD, fileName, criteriaWeights, IndifferenceThresholds,
                      PreferenceThresholds, VetoThresholds, minmaxcriteria):
 
-        cmd = ["Rscript", pathRScript + "rscripts/ELECTREv2.R", pathWD, fileName, criteriaWeights, IndifferenceThresholds,
+        cmd = [pathRScript + "rscripts/ELECTREv2.R", pathWD, fileName, criteriaWeights, IndifferenceThresholds,
                PreferenceThresholds, VetoThresholds, minmaxcriteria]
         proc = Popen(cmd, stdout=PIPE)
         stdout = proc.communicate()[0]
@@ -211,7 +212,10 @@ class MCDARoutingAndDeploying(Selection):
 
         ### REMOVING NODES WITH ONE SERVICE DEPLOYED, excetp the cloud
         nwithservices = list(np.unique(sim.alloc_DES.values()))
-        nwithservices.remove(self.idcloud)
+        try:
+            nwithservices.remove(self.idcloud)
+        except:
+            print("error - self.idcloud not present in the list of services")
         # print "NODOS REMOVIDOS %s" %nwithservices
         self.logger.info("Ignored nodes %s"%nwithservices)
         # df.drop(df.loc[df['node'].isin(nwithservices)].index, inplace=True)
@@ -246,7 +250,7 @@ class MCDARoutingAndDeploying(Selection):
         v3 = np.percentile(values, 40)
 
         # 4 CRITERIA: min : penalizacion por "SW" incompatibility "NODE id % app user"
-        print app_name
+        print(app_name)
 
         values = []
         for node in nodes:
@@ -366,13 +370,13 @@ class MCDARoutingAndDeploying(Selection):
 
 
     def print_control_services(self):
-        print "-"*30
-        print " - Assignaments (node_src,service) -> (PATH, DES) "
-        print "-" * 30
+        print("-"*30)
+        print(" - Assignaments (node_src,service) -> (PATH, DES) ")
+        print("-" * 30)
         for k in self.controlServices.keys():
-            print k,"->",self.controlServices[k]
+            print(k,"->",self.controlServices[k])
 
-        print "-" * 30
+        print("-" * 30)
         return self.controlServices
 
     """

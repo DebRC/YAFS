@@ -16,12 +16,11 @@ import random
 import numpy as np
 
 from yafs.core import Sim
-from yafs.application import Application, Message
+from yafs.application import Application, Message, fractional_selectivity
 from yafs.topology import Topology
 from yafs.distribution import *
-from yafs.utils import fractional_selectivity
-
 from yafs.placement import JSONPlacement
+
 from MCDAPathSelectionNPlacement import MCDARoutingAndDeploying
 from WAPathSelectionNPlacement import WARoutingAndDeploying
 from jsonDynamicPopulation import DynamicPopulation
@@ -127,7 +126,7 @@ def main(simulated_time, path,pathResults,case, failuresON, it,idcloud):
     t = Topology()
     dataNetwork = json.load(open(path + 'networkDefinition.json'))
     t.load(dataNetwork)
-    t.write(path +"network.gexf")
+    # t.write(path +"network.gexf")
     # t = loadTopology(path + 'test_GLP.gml')
 
 
@@ -202,9 +201,9 @@ def main(simulated_time, path,pathResults,case, failuresON, it,idcloud):
             if element['app'] == aName:
                 data.append(element)
 
-        distribution = exponentialDistribution(name="Exp", lambd=random.randint(100,1000), seed= int(aName)*100+it)
+        distribution = exponential_distribution(name="Exp", lambd=random.randint(100,1000), seed= int(aName)*100+it)
         pop_app = DynamicPopulation(name="Dynamic_%s" % aName, data=data, iteration=it, activation_dist=distribution)
-        s.deploy_app(apps[aName], placement, pop_app, selectorPath)
+        s.deploy_app2(apps[aName], placement, pop_app, selectorPath)
 
     logging.info(" Performing simulation: %s %i "%(case,it))
     s.run(stop_time, test_initial_deploy=False, show_progress_monitor=False)  # TEST to TRUE
@@ -220,7 +219,7 @@ def main(simulated_time, path,pathResults,case, failuresON, it,idcloud):
     s.print_debug_assignaments()
 
     # Genera un fichero GEPHI donde se marcan los nodos con usuarios (userposition) y los nodos con servicios desplegados (services)
-    print "----"
+    print("----")
     l = s.get_alloc_entities()
     userposition = {}
     deploymentservices = {}
@@ -240,12 +239,12 @@ def main(simulated_time, path,pathResults,case, failuresON, it,idcloud):
     nx.set_node_attributes(s.topology.G, values= userposition, name='userposition')
     # nx.write_gexf(s.topology.G, "network_assignments.gexf")
 
-    print selectorPath.dname
+    print(selectorPath.dname)
     f = open(selectorPath.dname + "/file_alloc_entities_%s_%i_%i.pkl" % (case, stop_time, it), "wb")
     pickle.dump(l, f)
     f.close()
 
-    print "----"
+    print("----")
     controlServices = selectorPath.controlServices
     # print controlServices
     attEdges = collections.Counter()
@@ -273,14 +272,14 @@ if __name__ == '__main__':
     # NOTE: ABSOLUTE PATH TO JSON FILES ACCORDING TO THE EXECUTION-PLACE
     # We simplify the path update in our experimentation to external servers (it's a bit precarious but functional)
     runpath = os.getcwd()
-    print runpath
+    print(runpath)
     if "/home/uib/" in runpath :
         pathExperimento = "/home/uib/src/YAFS/src/examples/MCDA/exp1/"
     else:
         pathExperimento = "exp1/"
     #####
 
-    print "PATH EXPERIMENTO: ",pathExperimento
+    print("PATH EXPERIMENTO: ",pathExperimento)
     nSimulations = 1
     timeSimulation = 10000
     datestamp = time.strftime('%Y%m%d')
@@ -316,7 +315,7 @@ if __name__ == '__main__':
         print("\n--- %s seconds ---" % (time.time() - start_time))
         start_time = time.time()
 
-    print "Simulation Done"
+    print("Simulation Done")
 
 ### NOTAS:
 # Deberia de cambiar la posicion en cada simulation

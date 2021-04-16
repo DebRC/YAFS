@@ -31,19 +31,19 @@ def drawBoxPlot_Both_USER_ax(app,dr,drILP,ax):
      data_a=dr[dr.app==app].r.values
      data_b=drILP[drILP.app==app].r.values
      ticks = list(np.sort(dr[dr.app==app].user.unique()))
-     bpl = ax.boxplot(data_a, positions=np.array(xrange(len(data_a)))*2.0-0.4, sym='', widths=0.55,
+     bpl = ax.boxplot(data_a, positions=np.array(range(len(data_a)))*2.0-0.4, sym='', widths=0.55,
                       whiskerprops = dict(linewidth=2),
                      boxprops = dict(linewidth=2),
                       capprops = dict(linewidth=2),
                      medianprops = dict(linewidth=2))
-     bpI = ax.boxplot(data_b, positions=np.array(xrange(len(data_b)))*2.0+0.4, sym='', widths=0.55,
+     bpI = ax.boxplot(data_b, positions=np.array(range(len(data_b)))*2.0+0.4, sym='', widths=0.55,
                          whiskerprops = dict(linewidth=2),
                      boxprops = dict(linewidth=2),
                       capprops = dict(linewidth=2),
                      medianprops = dict(linewidth=2))
      set_box_color(bpl, '#a6bddb')
      set_box_color(bpI, '#e34a33')
-     ax.get_xaxis().set_ticks(xrange(0, len(ticks) * 2, 2))
+     ax.get_xaxis().set_ticks(range(0, len(ticks) * 2, 2))
      ax.set_xticklabels(ticks)
      ax.set_title("App:%i"%app)
      ax.set_xlim(-2, len(ticks)*2)
@@ -109,7 +109,7 @@ def getRbyApp(df,dtmp):
         totalmsg = len(resp)
         dr.loc[ixloc] = [g[0], g[1], avg, dsv, mode, resp, invalid, over,totalmsg]
         ixloc += 1
-        print g, "\t", len(dtmp[g]), "\t", invalid, "\t", over
+        print(g, "\t", len(dtmp[g]), "\t", invalid, "\t", over)
 
     return dr, times
 
@@ -152,7 +152,7 @@ if not os.path.exists(pathSimple+"dr_%s_%i.pkl"%("MCDA",0)):
               
 for i in range(simulations):
     if i!=5:
-     print "Boxing plot: %i" %i
+     print("Boxing plot: %i" %i)
      dr = pd.read_pickle(pathSimple+"dr_%s_%i.pkl"%("MCDA",i))
      drILP = pd.read_pickle(pathSimple+"dr_%s_%i.pkl"%("WA",i))
 
@@ -190,7 +190,7 @@ def distributionServices(case):
     df = pd.DataFrame().from_dict(dep, orient='index')   
     df = df[df[0] != 0]
     df = df.sort_values(by=[0],ascending=False)
-    print "%s Total servicios desplegados: %i"%(case,df[0].sum())
+    print("%s Total servicios desplegados: %i"%(case,df[0].sum()))
 
 
     fig, ax = plt.subplots(figsize=(8.0,4.0))
@@ -297,7 +297,7 @@ ind = np.array(ticks)
 width = 0.45
         
 fig, ax = plt.subplots(figsize=(8.0,4.0))
-ax.get_xaxis().set_ticks(xrange(0, len(ticks) * 2, 2))
+ax.get_xaxis().set_ticks(range(0, len(ticks) * 2, 2))
 r = ax.bar(ind, data_a, width, color='r')
 r2 = ax.bar(ind+width, data_b, width, color='y')
 ax.set_xticks(ind+ width/2)
@@ -380,8 +380,8 @@ for k in dep_WA.keys():
         if int(k)<100:
             priceWA+=1
 
-print "The cost in Electre is: %i"%priceMCDA
-print "The cost in WA is: %i"%priceWA
+print("The cost in Electre is: %i"%priceMCDA)
+print("The cost in WA is: %i"%priceWA)
 
 # =============================================================================
 # Penalización por uso de ese nodo en APP
@@ -402,6 +402,6 @@ for case in cases:
         if app[i]%2 != topo[i]%2:
             pena +=1
             
-    print "Penalización por caso: %s = %i" %(case,pena)
+    print("Penalización por caso: %s = %i" %(case,pena))
 
     

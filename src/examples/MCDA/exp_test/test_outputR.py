@@ -20,9 +20,9 @@ for i,v in enumerate(l):
        
 
 weights
-print len(weights)
+print(len(weights))
 
-nodes = range(999)
+nodes = list(range(999))
 table = zip(nodes, weights)
 table = sort_table(table, 1)
 
@@ -34,5 +34,4 @@ for category in ["A","B","C","D"]:
        break
 #
 nodeelegibles = [t[0] for t in results]
-print "Number of nodes in the best category: %i"%len(nodeelegibles)
-
+print("Number of nodes in the best category: %i"%len(nodeelegibles))
