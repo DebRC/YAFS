@@ -39,21 +39,19 @@
 """
 import json
 from pprint import pprint
-
-
+from jsonPopulation import *
+import time
 import argparse
+import random
 
 from yafs.core import Sim
-from yafs.application import Application,Message
+from yafs.application import Application,Message,fractional_selectivity
 from yafs.topology import Topology
 from yafs.placement import JSONPlacement
 from yafs.distribution import *
 
 from selection_multipleDeploys import MinShortPath
-from yafs.distribution import deterministicDistribution
-from yafs.utils import fractional_selectivity
-from jsonPopulation import *
-import time
+
 
 RANDOM_SEED = 1
 
@@ -88,7 +86,7 @@ def create_application():
     MODULES/SERVICES: Definition of Generators and Consumers (AppEdges and TupleMappings in iFogSim)
     """
     # MODULE SOURCES: only periodic messages
-    dDistribution = deterministicDistribution(name="Deterministic", time=100)
+    dDistribution = deterministic_distribution(name="Deterministic", time=100)
 
     a.add_service_source("Calculator", dDistribution, m_player_game_state) #According with the comments on VRGameFog.java, the period is 100ms
     a.add_service_source("Coordinator", dDistribution, m_global_game_state)
@@ -112,7 +110,7 @@ def main(simulated_time):
     data = json.load(open('egg_infrastructure.json'))
     pprint(data["entity"])
     t.load(data)
-    t.write("network.gexf")
+    #t.write("network.gexf")
 
     """
     APPLICATION
@@ -216,7 +214,7 @@ def main(simulated_time):
 
     stop_time = simulated_time
     s = Sim(t, default_results_path="Results_%i" % (stop_time))
-    s.deploy_app(app, placement, pop, selectorPath)
+    s.deploy_app2(app, placement, pop, selectorPath)
 
     s.run(stop_time, test_initial_deploy=False, show_progress_monitor=False)
     s.print_debug_assignaments()

@@ -68,9 +68,9 @@ class DeviceSpeedAwareRouting(Selection):
         #print message.dst_int  # 301
         #print link #(130, 301) link is broken! 301 is unreacheble
 
-        print sim.topology.G.nodes()
-        print sim.topology.G.edges()
-        print " PATH NO REACHEABLE ! "
+        print(sim.topology.G.nodes())
+        print(sim.topology.G.edges())
+        print(" PATH NO REACHEABLE ! ")
         exit()
 
         idx = message.path.index(link[0])

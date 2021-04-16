@@ -9,12 +9,10 @@ import random
 from audioop import reverse
 
 from yafs.core import Sim
-from yafs.application import Application,Message
+from yafs.application import Application,Message,fractional_selectivity
 from yafs.topology import  Topology
 from yafs.selection import First_ShortestPath
-
-from yafs.distribution import deterministicDistribution
-from yafs.utils import fractional_selectivity
+from yafs.distribution import deterministic_distribution
 
 from CentricityPlacement import NoPlacementOfModules
 from CentricityPopulation import Statical
@@ -123,8 +121,8 @@ def computingWeights(t,all_nodes_dev,edge_dev,workload_type):
             minvalue = min(len(minPath[(vertex[0],dev)]),len(minPath[(vertex[1],dev)]))
             minStep[(vertex,dev)]=minvalue
 
-    weight_load = range(0,len(workload_type))
-    version_printed_weights2 =range(0,len(workload_type))
+    weight_load = list(range(0,len(workload_type)))
+    version_printed_weights2 =list(range(0,len(workload_type)))
     for idx,load in enumerate(workload_type):
         weight_load[idx] = {}
         version_printed_weights2[idx] = {}
@@ -158,8 +156,8 @@ def main():
     sensor_workload_types = [[16, 18],[13,14,15,16]]
     lambdas_wl = np.random.randint(low=5, high=10, size=len(sensor_workload_types))
     id_lambdas = zip(range(0,len(lambdas_wl)),lambdas_wl)
-    id_lambdas.sort(key=lambda tup: tup[1],reverse=True)  # sorts in place
-    print id_lambdas # [(1, 9), (0, 8)]
+    id_lambdas=sorted(id_lambdas,key=lambda tup: tup[1],reverse=True)  # sorts in place
+    print(id_lambdas) # [(1, 9), (0, 8)]
 
     """
     topology.Centricity
@@ -221,14 +219,14 @@ def main():
                 pops[idx].set_sink_control({"id": [0], "number": 1, "module": apps[idx].get_sink_modules()})
                 # print "\t", "SOURCE"
                 # In addition, a source includes a distribution function:
-                dDistribution = deterministicDistribution(name="Deterministic", time=idWL[1])
+                dDistribution = deterministic_distribution(name="Deterministic", time=idWL[1])
                 pops[idx].set_src_control(
                     {"id": sensor_workload_types[idx], "number": 1, "message": apps[idx].get_message("m-st"),
                      "distribution": dDistribution })
 
         else:
             #Computing best device for each WL-type and each centrality function
-            centralWL = range(0,len(weights))
+            centralWL = list(range(0,len(weights)))
             for idx,v in enumerate(sensor_workload_types):
                 nx.set_edge_attributes(t.G, values=weights[idx], name="weight")
                 centrality = functions[f](t.G, weight="weight")
@@ -242,10 +240,9 @@ def main():
                 ## idWL[0] #index WL
                 ## idWL[1] #lambda
 
-                for dev, value in sorted(centralWL[idx].iteritems(), key=lambda (k, v): (v, k),reverse=True):
+                for dev, value in sorted(centralWL[idx].items(), key=lambda k:(k[1], k[0]),reverse=True):
                     # print "%s: %s" % (dev, value)
-                    #TODO CONTTOLAR LA CAPACIDAD DEL DISPOSITO HERE
-                    if not dev in previous_deploy.values():
+                    if dev not in previous_deploy.values():
                         previous_deploy[idx] = dev
                         break
                 #TODO chequear que dEV es un device
@@ -265,7 +262,7 @@ def main():
                 pops[idx].set_sink_control({"id":[dev],"number":1,"module":apps[idx].get_sink_modules()})
                 # print "\t","SOURCE"
                 #In addition, a source includes a distribution function:
-                dDistribution = deterministicDistribution(name="Deterministic", time=idWL[1])
+                dDistribution = deterministic_distribution(name="Deterministic", time=idWL[1])
                 pops[idx].set_src_control({"id": sensor_workload_types[idx], "number":1,"message": apps[idx].get_message("m-st"), "distribution": dDistribution})
 
         """
@@ -274,7 +271,7 @@ def main():
         stop_time = 100 #CHECK
         s = Sim(t)
         for idx,app in enumerate(apps):
-            s.deploy_app(app, placement, pops[idx], selectorPath)
+            s.deploy_app2(app, placement, pops[idx], selectorPath)
 
         s.run(stop_time,test_initial_deploy=False,show_progress_monitor=False) #In the internal code of iFogSim, that simulator runs by default until 10.000 units of time: In their case,it is until 10s
 

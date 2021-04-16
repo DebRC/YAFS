@@ -11,29 +11,22 @@ import json
 import networkx as nx
 import logging.config
 import subprocess
-
-
 import collections
 import pickle
 import random
 import numpy as np
 from collections import Counter
-
-from yafs.core import Sim
-from yafs.application import Application, Message
-from yafs.topology import Topology
-from yafs.distribution import *
-import yafs.distribution
-from yafs.utils import get_shortest_random_path
-from yafs.coverage import Voronoi, CircleCoverage
-from yafs.utils import *
-
-from yafs.placement import JSONPlacement
-from yafs.customMovement import MovementUpdate
-from selection_multipleDeploys import DeviceSpeedAwareRouting
-
 import trackanimation
 
+from yafs.core import Sim
+from yafs.application import Application, Message, fractional_selectivity
+from yafs.topology import Topology
+from yafs.distribution import *
+from yafs.coverage import Voronoi, CircleCoverage
+from yafs.placement import JSONPlacement
+from yafs.customMovement import MovementUpdate
+
+from selection_multipleDeploys import DeviceSpeedAwareRouting
 from jsonMobilePopulation import JSONPopulation
 
 

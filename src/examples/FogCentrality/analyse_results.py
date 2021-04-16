@@ -3,6 +3,7 @@ import pandas as pd
 import glob
 import networkx as nx
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 
@@ -27,21 +28,19 @@ values = [[],[],[],[]]
 m = Metrics()
 
 for topo in topologies:
-    print topo
+    print(topo)
     for size in community_size:
-        print "\t",size
+        print("\t",size)
         vcluster = 0.0
         for idx, f in enumerate(functions):
             m.load_results("results_exp/results_exp_%s_%i_%s" % (topo,size,f))
             df,dl = m.get()
-            print "\t\t%s :%i" %(labelsFunctions[idx], len(dl))
+            print("\t\t%s :%i" %(labelsFunctions[idx], len(dl)))
             if vcluster == 0.0:
                 vcluster = len(dl)+0.0
             else:
-                print "\t\tSpeedup %f" %(float(len(dl))/vcluster)
+                print("\t\tSpeedup %f" %(float(len(dl))/vcluster))
             values[idx].append(len(dl))
-exit()
-
 experiments = len(community_size)
 
 fig, ax = plt.subplots(figsize=(8,4))
@@ -56,8 +55,8 @@ N = len(functions)
 # patterns = ('x', ' ', ' ', 'o', 'O', '.')
 
 for idx,f in enumerate(labelsFunctions):
-    print idx
-    print f
+    print(idx)
+    print(f)
     p[idx] = plt.bar(index+(width*idx), values[idx], width, color=colors[idx], label=f) #hatch=patterns[idx])
 
 
